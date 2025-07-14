@@ -7,3 +7,4 @@ elt_pipeline/logs/
 jupyter_files/.ipynb_checkpoints
 # Python cache and compile files
 __pycache__/
+elt_pipeline/__pycache__/

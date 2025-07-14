@@ -1,5 +1,6 @@
 from prefect import flow
 from dlt_weather_api_to_duckdb import dlt_load_weather_api
+from transformation_staging import run_ddl
 
 @flow
 def prefect_elt():
@@ -10,7 +11,7 @@ def prefect_elt():
     dlt_load_weather_api(endpoint="forecast")
 
     ## Run any downstream transformations
-    ## TO DO add SQL transformation
+    run_ddl()
     
 if __name__ == "__main__":
     # If run locally, schedule every 15 minutes

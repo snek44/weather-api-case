@@ -1,3 +1,4 @@
+import sys
 from typing import Any
 from prefect import task
 
@@ -69,7 +70,7 @@ def dlt_source_weather_api(api_key=dlt.secrets.value, endpoint="current") -> Any
     yield from rest_api_resources(config)
 
 
-@task # Define this function as a Prefect task
+@task
 def dlt_load_weather_api(endpoint="current") -> None:
     # Invokes the dlt pipeline to load data from the WeatherAPI into DuckDB
     pipeline = dlt.pipeline(
@@ -82,4 +83,11 @@ def dlt_load_weather_api(endpoint="current") -> None:
     print(load_info)
 
 if __name__ == "__main__":
-    dlt_load_weather_api(endpoint="current")
+    if len(sys.argv) > 1 and sys.argv[1] in {"current", "forecast"}:
+        endpoint = sys.argv[1]
+    else:
+        print("Usage: python dlt_weather_api_to_duckdb.py [current|forecast]")
+        sys.exit(1)
+
+    # Run the task function (bypassing Prefect orchestration)
+    dlt_load_weather_api.fn(endpoint=endpoint)
