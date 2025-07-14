@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS staging;
+
 CREATE OR REPLACE VIEW staging.weather_api_latest_forecast AS
 (
 /* 
