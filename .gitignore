@@ -1,6 +1,9 @@
+# Virtual env and DB store
 .venv/
 .duckdb
+# Secrets and logs
 elt_pipeline/.dlt/secrets.toml
-__pycache__/
 elt_pipeline/logs/
 jupyter_files/.ipynb_checkpoints
+# Python cache and compile files
+__pycache__/
