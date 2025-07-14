@@ -32,6 +32,12 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+API Key for WeatherAPI must be stored locally. Create a new file in the folder *elt_pipeline/.dlt/secrets.toml* and add the following 2 lines:
+```
+[sources.dlt_weather_api_to_duckdb]
+api_key="your api key"
+```
+
 Once the environment is initialized, you can run the dlt pipeline either manually or through Prefect schedule with the commands below.
 
 As DuckDB doesn't allow concurrent processes, stop the Schedule if you want to query the DuckDB, or expect potential failed loads (if you keep your DuckDB connection open in Jupyter / another DB IDE).
